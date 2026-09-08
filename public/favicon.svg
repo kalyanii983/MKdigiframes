@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE082"/>
+      <stop offset="50%" stop-color="#D4AF37"/>
+      <stop offset="100%" stop-color="#B38B22"/>
+    </linearGradient>
+    <radialGradient id="purpleBg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#251759"/>
+      <stop offset="100%" stop-color="#08051A"/>
+    </radialGradient>
+  </defs>
+  <!-- Frame outer -->
+  <rect x="4" y="4" width="92" height="92" rx="18" fill="url(#purpleBg)" stroke="url(#goldGrad)" stroke-width="4"/>
+  <!-- Frame inner border -->
+  <rect x="12" y="12" width="76" height="76" rx="12" fill="none" stroke="url(#goldGrad)" stroke-width="1.5" stroke-dasharray="2,2"/>
+  <!-- Sacred Om / Deity Symbol -->
+  <text x="50" y="62" font-size="44" text-anchor="middle" fill="url(#goldGrad)" font-family="serif" font-weight="bold">🕉</text>
+</svg>
