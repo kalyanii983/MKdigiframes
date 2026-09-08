@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, Phone, MessageCircle, Sparkles, Clock, MapPin, ChevronDown, Send } from 'lucide-react'
 import { BUSINESS_INFO } from '../data/framesData'
 
-export default function Navbar({ onOpenEnquiry }) {
+function Navbar({ onOpenEnquiry }) {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
   const [callDropdownOpen, setCallDropdownOpen] = useState(false)
+  const headerRef = useRef(null)
+  const [headerHeight, setHeaderHeight] = useState(88)
 
   const navLinks = [
     { name: 'Home', href: '#home', id: 'home' },
@@ -18,21 +20,41 @@ export default function Navbar({ onOpenEnquiry }) {
     { name: 'Enquiry', href: '#enquiry', id: 'enquiry' },
   ]
 
+   console.log('navLinks length:', navLinks.length);
   // Track scroll position for header compression and active section highlight
+  // Measure actual header height so the mobile drawer always opens flush below
   useEffect(() => {
+    const measure = () => {
+      if (headerRef.current) {
+        setHeaderHeight(headerRef.current.getBoundingClientRect().height)
+      }
+    }
+    measure()
+    window.addEventListener('resize', measure)
+    return () => window.removeEventListener('resize', measure)
+  }, [])
+
+  useEffect(() => {
+    let ticking = false
     const handleScroll = () => {
-      setScrolled(window.scrollY > 25)
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 25)
 
-      // Active section spy
-      const sections = ['enquiry', 'gallery', 'services', 'frames', 'about', 'home']
-      const scrollPos = window.scrollY + 160
+          // Active section spy
+          const sections = ['enquiry', 'gallery', 'services', 'frames', 'about', 'home']
+          const scrollPos = window.scrollY + 160
 
-      for (const sec of sections) {
-        const el = document.getElementById(sec)
-        if (el && el.offsetTop <= scrollPos) {
-          setActiveSection(sec)
-          break
-        }
+          for (const sec of sections) {
+            const el = document.getElementById(sec)
+            if (el && el.offsetTop <= scrollPos) {
+              setActiveSection(sec)
+              break
+            }
+          }
+          ticking = false
+        })
+        ticking = true
       }
     }
 
@@ -52,7 +74,7 @@ export default function Navbar({ onOpenEnquiry }) {
     }
   }, [isOpen])
 
-  const handleNavClick = (e, href) => {
+  const handleNavClick = useCallback((e, href) => {
     if (e && e.preventDefault) e.preventDefault()
     setIsOpen(false)
     setCallDropdownOpen(false)
@@ -78,10 +100,10 @@ export default function Navbar({ onOpenEnquiry }) {
         }
       }, 50)
     }
-  }
+  }, [])
 
   return (
-    <header className="sticky top-0 z-40 w-full select-none">
+    <header ref={headerRef} className="sticky top-0 z-40 w-full select-none">
       {/* 1. Top Luxury Utility Bar */}
       <div className="bg-gradient-to-r from-royal-950 via-royal-900 to-royal-950 border-b border-gold/20 py-1.5 sm:py-2 px-3 sm:px-4 text-xs">
         <div className="container-custom flex flex-wrap justify-between items-center gap-1.5 sm:gap-2">
@@ -138,12 +160,13 @@ export default function Navbar({ onOpenEnquiry }) {
         </div>
       </div>
 
-      {/* 2. Main High-End Navigation Bar */}
       <nav
-        className={`w-full transition-all duration-300 relative ${
-          scrolled
-            ? 'bg-royal-950/95 backdrop-blur-xl shadow-2xl shadow-black/80 border-b border-gold/30 py-2 sm:py-2.5'
-            : 'bg-royal-950/90 backdrop-blur-md border-b border-gold/15 py-2.5 sm:py-3.5'
+        className={`w-full transition-all duration-200 ease-in-out relative ${
+          isOpen
+            ? 'bg-royal-950 shadow-2xl shadow-black/80 border-b border-gold/30 py-2 sm:py-2.5'
+            : scrolled
+              ? 'bg-royal-950/95 backdrop-blur-xl shadow-2xl shadow-black/80 border-b border-gold/30 py-2 sm:py-2.5'
+              : 'bg-royal-950/90 backdrop-blur-md border-b border-gold/15 py-2.5 sm:py-3.5'
         }`}
       >
         <div className="container-custom flex justify-between items-center">
@@ -213,7 +236,7 @@ export default function Navbar({ onOpenEnquiry }) {
           </div>
 
           {/* Desktop Right Action Area */}
-          <div className="hidden sm:flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-3">
             {/* Quick Call Dropdown Trigger */}
             <div className="relative">
               <button
@@ -294,48 +317,51 @@ export default function Navbar({ onOpenEnquiry }) {
             <>
               {/* Backdrop Dimmer */}
               <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.2 }}
-                className="fixed inset-0 top-[88px] bg-black/70 backdrop-blur-sm z-30 lg:hidden"
-                onClick={() => setIsOpen(false)}
-              />
+                 initial={{ opacity: 0 }}
+                 animate={{ opacity: 1 }}
+                 exit={{ opacity: 0 }}
+                 transition={{ duration: 0.2 }}
+                 className="fixed inset-0 bg-black/70 backdrop-blur-sm z-30 lg:hidden"
+                 onClick={() => setIsOpen(false)}
+               />
 
-              {/* Floating Menu Body */}
-              <motion.div
-                className="absolute top-full left-0 right-0 w-full max-h-[calc(100vh-90px)] overflow-y-auto bg-royal-950/98 backdrop-blur-2xl border-b border-gold/30 shadow-2xl z-40 lg:hidden"
-                initial={{ opacity: 0, y: -8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.22, ease: 'easeOut' }}
-              >
-                <div className="container-custom py-5 flex flex-col gap-1.5">
+               {/* Floating Menu Body */}
+               <motion.div
+                className="fixed inset-x-0 w-full overflow-y-auto bg-royal-950 border-b border-gold/30 shadow-2xl z-[9999] lg:hidden"
+                style={{ top: headerHeight, maxHeight: `calc(100vh - ${headerHeight}px)` }}
+                 initial={{ opacity: 0, y: -8 }}
+                 animate={{ opacity: 1, y: 0 }}
+                 exit={{ opacity: 0, y: -8 }}
+                 transition={{ duration: 0.15, ease: 'easeInOut' }}
+               >
+                 <ul className="p-4 space-y-2">
                   {navLinks.map((link) => {
                     const isActive = activeSection === link.id
                     return (
-                      <a
-                        key={link.id}
-                        href={link.href}
-                        onClick={(e) => handleNavClick(e, link.href)}
-                        className={`text-left font-semibold py-3 px-4 rounded-xl transition-all text-sm flex items-center justify-between cursor-pointer ${
-                          isActive
-                            ? 'bg-gold/15 text-gold border border-gold/30 font-bold'
-                            : 'text-slate-200 hover:bg-royal-900 hover:text-gold active:bg-royal-850'
-                        }`}
-                      >
-                        <span className="text-base">{link.name}</span>
-                        {isActive ? (
-                          <span className="w-2 h-2 rounded-full bg-gold shadow-gold-glow" />
-                        ) : (
-                          <span className="text-gold/40 text-xs">→</span>
-                        )}
-                      </a>
+                      <li key={link.id}>
+                        <a
+                          href={link.href}
+                          onClick={(e) => handleNavClick(e, link.href)}
+                          className={`block text-left font-semibold py-3 px-4 rounded-xl transition-all duration-200 ease-in-out text-sm flex items-center justify-between cursor-pointer ${
+                            isActive
+                              ? 'bg-gold/15 text-gold border border-gold/30 font-bold'
+                              : 'bg-royal-900/60 text-slate-200 hover:bg-royal-800 hover:text-gold active:bg-royal-800'
+                          }`}
+                        >
+                          <span className="text-base">{link.name}</span>
+                          {isActive ? (
+                            <span className="w-2 h-2 rounded-full bg-gold shadow-gold-glow" />
+                          ) : (
+                            <span className="text-gold/40 text-xs">→</span>
+                          )}
+                        </a>
+                      </li>
                     )
                   })}
+                 </ul>
 
-                  {/* Mobile Info & Direct Actions Card */}
-                  <div className="pt-4 mt-2 border-t border-gold/20 space-y-3">
+                 {/* Mobile Info & Direct Actions Card */}
+                 <div className="p-4 pt-0 border-t border-gold/20 space-y-3">
                     <div className="bg-royal-900/90 p-3.5 rounded-2xl border border-gold/30 space-y-1.5 text-xs">
                       <div className="flex items-center gap-1.5 text-gold font-bold">
                         <MapPin size={13} /> Nagavara Showroom • Bengaluru
@@ -373,9 +399,8 @@ export default function Navbar({ onOpenEnquiry }) {
                     >
                       <MessageCircle size={16} /> Chat Directly on WhatsApp
                     </a>
-                  </div>
-                </div>
-              </motion.div>
+                 </div>
+               </motion.div>
             </>
           )}
         </AnimatePresence>
@@ -383,4 +408,5 @@ export default function Navbar({ onOpenEnquiry }) {
     </header>
   )
 }
+export default React.memo(Navbar);
 

@@ -93,17 +93,17 @@ export default function AboutSection({ onOpenEnquiry }) {
             </div>
 
             {/* Action Buttons */}
-            <div className="pt-4 flex flex-wrap items-center gap-4">
+            <div className="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
               <button
                 onClick={() => onOpenEnquiry && onOpenEnquiry(null)}
-                className="btn-primary text-sm py-3 px-6"
+                className="btn-primary w-full sm:w-auto justify-center text-sm py-3 px-6"
               >
                 Inquire With Our Specialists
               </button>
 
               <a
                 href="#contact"
-                className="btn-secondary text-sm py-3 px-6"
+                className="btn-secondary w-full sm:w-auto justify-center text-sm py-3 px-6"
               >
                 <MapPin size={16} className="text-gold" />
                 Visit Nagavara Store
@@ -199,13 +199,13 @@ export default function AboutSection({ onOpenEnquiry }) {
                   />
 
                   {/* Card content */}
-                  <div className="relative z-10 p-6 flex items-start gap-5">
+                  <div className="relative z-10 p-5 sm:p-6 flex flex-col sm:flex-row items-start gap-4 sm:gap-5">
                     {/* Icon badge with glow */}
                     <div
-                      className={`flex-shrink-0 w-14 h-14 rounded-2xl bg-gradient-to-br ${s.iconBg} border ${s.iconBorder} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}
+                      className={`flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br ${s.iconBg} border ${s.iconBorder} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}
                       style={{ boxShadow: 'inset 0 0 12px rgba(0,0,0,0.5)' }}
                     >
-                      <Icon size={26} className={s.iconColor} />
+                      <Icon size={24} className={`sm:w-[26px] sm:h-[26px] ${s.iconColor}`} />
                     </div>
 
                     {/* Text */}
@@ -238,18 +238,18 @@ export default function AboutSection({ onOpenEnquiry }) {
             >
               <div className="absolute inset-0 bg-gradient-to-r from-royal-850/90 via-royal-800/80 to-royal-850/90" />
               <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
-              <div className="relative z-10 p-5 flex items-center justify-between text-xs gap-3">
+              <div className="relative z-10 p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs gap-4 sm:gap-3">
                 <div>
-                  <div className="text-gold font-bold uppercase tracking-wider text-[11px] flex items-center gap-1.5 mb-1">
+                  <div className="text-gold font-bold uppercase tracking-wider text-[11px] flex items-center gap-1.5 mb-1.5 sm:mb-1">
                     <MapPin size={12} className="text-gold" /> Showroom Address
                   </div>
-                  <div className="text-slate-200 font-medium">{BUSINESS_INFO.address.full}</div>
+                  <div className="text-slate-200 font-medium leading-relaxed sm:leading-normal">{BUSINESS_INFO.address.full}</div>
                 </div>
                 <a
                   href={BUSINESS_INFO.mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-shrink-0 px-4 py-2 rounded-xl bg-gradient-to-r from-gold/20 to-gold/10 text-gold hover:from-gold hover:to-gold-dark hover:text-royal-950 font-semibold transition-all duration-300 border border-gold/40 hover:border-gold whitespace-nowrap"
+                  className="w-full sm:w-auto justify-center flex-shrink-0 px-4 py-2.5 sm:py-2 rounded-xl bg-gradient-to-r from-gold/20 to-gold/10 text-gold hover:from-gold hover:to-gold-dark hover:text-royal-950 font-semibold transition-all duration-300 border border-gold/40 hover:border-gold whitespace-nowrap"
                 >
                   Directions →
                 </a>
