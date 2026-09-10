@@ -28,8 +28,12 @@ export default function Footer({ onOpenEnquiry }) {
           {/* Col 1: Brand & Tagline (4 cols) */}
           <div className="lg:col-span-4 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-gold via-gold-rich to-amber-700 flex items-center justify-center text-royal-950 font-bold text-xl shadow-gold-glow border border-gold-light/40">
-                🕉️
+              <div className="w-11 h-11 rounded-xl border border-gold/60 shadow-gold-glow overflow-hidden flex-shrink-0">
+                <img
+                  src="/images/logo.jpeg"
+                  alt="MK Digi Frames Logo"
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div>
                 <h3 className="font-serif font-bold text-xl text-white">

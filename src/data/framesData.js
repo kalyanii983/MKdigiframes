@@ -49,6 +49,11 @@ export const FEATURED_FRAMES = [
     bgGradient: 'from-blue-900/50 via-royal-900 to-black',
     accentColor: 'text-blue-400',
     borderColor: 'border-blue-500/40',
+    relatedImages: [
+      { src: '/images/shiva2.jpeg', label: 'Shiva – Meditative Trishul' },
+      { src: '/images/shiva1.jpg', label: 'Shiva – Sacred Kailash Darshan' },
+      { src: '/images/shivaimg.jpg', label: 'Shiva – Divine Third Eye' },
+    ],
   },
   {
     id: 'venkateswara-balaji',
@@ -67,6 +72,21 @@ export const FEATURED_FRAMES = [
     bgGradient: 'from-yellow-900/50 via-royal-900 to-black',
     accentColor: 'text-yellow-400',
     borderColor: 'border-yellow-500/40',
+    relatedImages: [
+      { src: '/images/venk1.jpeg', label: 'Venkateswara – Classic Darshan' },
+      { src: '/images/venk2.jpeg', label: 'Venkateswara – Grand Ananda Nilayam' },
+      { src: '/images/venka3.jpeg', label: 'Venkateswara – Tirumala Darshan 3' },
+      { src: '/images/venka4.jpeg', label: 'Venkateswara – Tirumala Darshan 4' },
+      { src: '/images/venka5.jpeg', label: 'Venkateswara – Tirumala Darshan 5' },
+      { src: '/images/venka6.jpeg', label: 'Venkateswara – Tirumala Darshan 6' },
+      { src: '/images/venka7.jpeg', label: 'Venkateswara – Tirumala Darshan 7' },
+      { src: '/images/venka9.jpeg', label: 'Venkateswara – Tirumala Darshan 9' },
+      { src: '/images/venka10.jpeg', label: 'Venkateswara – Tirumala Darshan 10' },
+      { src: '/images/venka11.jpeg', label: 'Venkateswara – Tirumala Darshan 11' },
+      { src: '/images/venka12.jpeg', label: 'Venkateswara – Tirumala Darshan 12' },
+      { src: '/images/venka13.jpeg', label: 'Venkateswara – Tirumala Darshan 13' },
+      { src: '/images/venkateshwaraswamyimg.jpeg', label: 'Venkateswara – Srinivasa Swamy' },
+    ],
   },
   {
     id: 'lakshmi-devi',
@@ -85,6 +105,11 @@ export const FEATURED_FRAMES = [
     bgGradient: 'from-rose-900/50 via-royal-900 to-black',
     accentColor: 'text-rose-400',
     borderColor: 'border-rose-500/40',
+    relatedImages: [
+      { src: '/images/laxmiimg.png', label: 'Lakshmi – Ashta Lakshmi Divine' },
+      { src: '/images/laxmiimg (2).png', label: 'Lakshmi – Swarna Alankaram 3' },
+      { src: '/images/laxmiimg5.png', label: 'Lakshmi – Divine Grace 5' },
+    ],
   },
   {
     id: 'krishna-radha',
@@ -103,6 +128,11 @@ export const FEATURED_FRAMES = [
     bgGradient: 'from-indigo-900/50 via-royal-900 to-black',
     accentColor: 'text-indigo-400',
     borderColor: 'border-indigo-500/40',
+    relatedImages: [
+      { src: '/images/krishnaimg (2).png', label: 'Krishna – Vrindavan Darshan' },
+      { src: '/images/krishna1.jpg', label: 'Krishna – Flute Serenade' },
+      { src: '/images/krishna2.jpg', label: 'Krishna – Sacred Peacock Feather' },
+    ],
   },
   {
     id: 'guru-raghavendra',
@@ -121,6 +151,10 @@ export const FEATURED_FRAMES = [
     bgGradient: 'from-amber-900/50 via-royal-900 to-black',
     accentColor: 'text-amber-400',
     borderColor: 'border-amber-500/40',
+    relatedImages: [
+      { src: '/images/guru2.jpeg', label: 'Guru Raghavendra – Sacred Darshan 2' },
+      { src: '/images/guru3.jpeg', label: 'Guru Raghavendra – Sacred Darshan 3' },
+    ],
   },
   {
     id: 'kumaraswamy-murugan',
@@ -139,6 +173,9 @@ export const FEATURED_FRAMES = [
     bgGradient: 'from-emerald-900/50 via-royal-900 to-black',
     accentColor: 'text-emerald-400',
     borderColor: 'border-emerald-500/40',
+    relatedImages: [
+      { src: '/images/kumaraswamyimg.png', label: 'Kumaraswamy – Subrahmanya Divine' },
+    ],
   },
   {
     id: 'ram-darbar',
@@ -157,6 +194,9 @@ export const FEATURED_FRAMES = [
     bgGradient: 'from-orange-900/50 via-royal-900 to-black',
     accentColor: 'text-orange-400',
     borderColor: 'border-orange-500/40',
+    relatedImages: [
+      { src: '/images/rama.jpg', label: 'Sri Rama – Sacred Darshan' },
+    ],
   },
   {
     id: 'ganesha-vighnaharta',
@@ -175,6 +215,11 @@ export const FEATURED_FRAMES = [
     bgGradient: 'from-yellow-900/50 via-royal-900 to-black',
     accentColor: 'text-yellow-400',
     borderColor: 'border-yellow-500/40',
+    relatedImages: [
+      { src: '/images/ganesh5.png', label: 'Ganesha – Grand Siddhi Vinayak' },
+      { src: '/images/ganeshimg (2).jpg', label: 'Ganesha – Ganpati Bappa Darshan' },
+      { src: '/images/ganeshimg.jpg', label: 'Ganesha – Auspicious Golden Halo' },
+    ],
   },
 ]
 
@@ -252,28 +297,20 @@ export const GALLERY_ITEMS = [
     style: 'Temple Gold Frame',
   },
   {
-    id: 10,
-    title: 'Navagraha & 9 Gods Sacred Panel',
-    category: 'Multi-Deity Setups',
-    size: 'Multi-Screen Frame',
-    image: '/images/9godsimg.jpeg',
-    style: 'Grand Pooja Mandir Setup',
-  },
-  {
-    id: 11,
-    title: 'All Gods Divine Trinity & Devi Altar',
-    category: 'Multi-Deity Setups',
-    size: 'Panoramic Wide Frame',
-    image: '/images/allgods1.jpeg',
-    style: 'Custom Wall Installation',
-  },
-  {
     id: 12,
     title: 'Lord Shiva Meditative Trishul Darshan',
     category: 'Shiva',
     size: '15.6 Inch IPS',
     image: '/images/shiva2.jpeg',
     style: 'Smoky Oak Bezel',
+  },
+  {
+    id: 13,
+    title: 'Char Dham – Four Divine Abodes',
+    category: 'Multi-Deity Setups',
+    size: 'Panoramic Wide Frame',
+    image: '/images/4gods.jpeg',
+    style: 'Grand Temple Panel',
   },
 ]
 

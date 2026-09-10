@@ -220,6 +220,8 @@ export default function HeroSection({ onOpenEnquiry }) {
                               src={currentDeity.image}
                               alt={currentDeity.name}
                               className="relative deity-glow-intense max-h-[290px] sm:max-h-[330px] w-auto max-w-full object-contain rounded-md"
+                              fetchpriority="high"
+                              loading="eager"
                             />
                           </div>
 
@@ -283,6 +285,7 @@ export default function HeroSection({ onOpenEnquiry }) {
                         src={item.thumbnail}
                         alt={item.name}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                        loading="lazy"
                       />
                       {activeFrameIndex === idx && (
                         <span className="absolute bottom-0 inset-x-0 h-1 bg-gold" />

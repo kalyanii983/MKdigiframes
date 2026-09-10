@@ -20,7 +20,6 @@ function Navbar({ onOpenEnquiry }) {
     { name: 'Enquiry', href: '#enquiry', id: 'enquiry' },
   ]
 
-   console.log('navLinks length:', navLinks.length);
   // Track scroll position for header compression and active section highlight
   // Measure actual header height so the mobile drawer always opens flush below
   useEffect(() => {
@@ -179,12 +178,12 @@ function Navbar({ onOpenEnquiry }) {
             {/* Ornate Gold Emblem Icon */}
             <div className="relative w-9 h-9 sm:w-11 sm:h-11 flex-shrink-0">
               <div className="absolute -inset-1 bg-gradient-to-br from-gold/40 to-saffron/40 rounded-xl blur-sm opacity-60 group-hover:opacity-100 transition-opacity" />
-              <div className="relative w-full h-full rounded-xl bg-gradient-to-br from-royal-900 via-royal-850 to-royal-950 border border-gold/60 p-0.5 shadow-lg flex items-center justify-center">
-                <div className="w-full h-full rounded-lg bg-gradient-to-br from-gold/20 via-royal-950 to-gold/10 flex items-center justify-center text-center">
-                  <span className="font-serif font-black text-gold text-base sm:text-lg drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-                    🕉
-                  </span>
-                </div>
+              <div className="relative w-full h-full rounded-xl border border-gold/60 shadow-lg overflow-hidden">
+                <img
+                  src="/images/logo.jpeg"
+                  alt="MK Digi Frames Logo"
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
 
